@@ -1,0 +1,428 @@
+<html><head><base href="https://arabiweb.net/vpn">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArabiWeb VPN - Secure Global Connection</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+:root {
+  --primary: #1565c0;
+  --secondary: #0d47a1;
+  --success: #2e7d32;
+  --danger: #c62828;
+  --warning: #f57f17;
+  --background: #f5f5f5;
+  --card-bg: #ffffff;
+  --text: #212121;
+  --text-light: #ffffff;
+  --border: #e0e0e0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+}
+
+.navbar {
+  background: var(--primary);
+  color: var(--text-light);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--text-light);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.server-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.server-card:hover {
+  transform: translateY(-5px);
+}
+
+.server-card .flag {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.server-status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status-online {
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+
+.status-offline {
+  background: var(--danger);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--text-light);
+}
+
+.btn-primary:hover {
+  background: var(--secondary);
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.stat-item {
+  padding: 1rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.features {
+  margin: 3rem 0;
+}
+
+.feature-card {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.speed-meter {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.speed-bar {
+  height: 100%;
+  background: var(--primary);
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.connect-btn {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="logo">
+      <i class="fas fa-shield-alt"></i>
+      ArabiWeb VPN
+    </div>
+    <div>
+      <a href="tel:+201276795187" style="color: white; text-decoration: none;">
+        <i class="fas fa-headset"></i> Support
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <h1>Secure & Fast VPN Service</h1>
+    <p>Connect securely to servers worldwide with military-grade encryption</p>
+    <button class="btn btn-primary connect-btn" style="margin-top: 2rem;" onclick="toggleConnection()">
+      <i class="fas fa-power-off"></i>
+      <span id="connect-text">Connect</span>
+    </button>
+  </div>
+
+  <div class="stats-container">
+    <div class="stat-item">
+      <div class="stat-value" id="active-users">2,547</div>
+      <div class="stat-label">Active Users</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">50+</div>
+      <div class="stat-label">Server Locations</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">Unlimited</div>
+      <div class="stat-label">Bandwidth</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><i class="fas fa-server"></i> Select Server Location</h2>
+    <div class="grid" id="server-grid">
+      <!-- Servers will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><i class="fas fa-tachometer-alt"></i> Connection Speed</h2>
+    <div style="margin: 2rem 0;">
+      <p>Download Speed</p>
+      <div class="speed-meter">
+        <div class="speed-bar" id="download-speed"></div>
+      </div>
+      <p style="text-align: right;" id="download-speed-text">0 Mbps</p>
+
+      <p>Upload Speed</p>
+      <div class="speed-meter">
+        <div class="speed-bar" id="upload-speed"></div>
+      </div>
+      <p style="text-align: right;" id="upload-speed-text">0 Mbps</p>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h3>Military-Grade Encryption</h3>
+        <p>Your data is protected with AES-256 encryption</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-ban"></i>
+        </div>
+        <h3>No Logs Policy</h3>
+        <p>We never track or store your online activities</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>Lightning Fast</h3>
+        <p>High-speed servers optimized for streaming</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const servers = [
+  { country: 'United States', flag: '🇺🇸', ping: 45, online: true },
+  { country: 'United Kingdom', flag: '🇬🇧', ping: 60, online: true },
+  { country: 'Germany', flag: '🇩🇪', ping: 55, online: true },
+  { country: 'Japan', flag: '🇯🇵', ping: 85, online: true },
+  { country: 'Singapore', flag: '🇸🇬', ping: 90, online: true },
+  { country: 'Australia', flag: '🇦🇺', ping: 95, online: true },
+  { country: 'Canada', flag: '🇨🇦', ping: 50, online: true },
+  { country: 'France', flag: '🇫🇷', ping: 65, online: true },
+  { country: 'Netherlands', flag: '🇳🇱', ping: 58, online: true },
+  { country: 'South Korea', flag: '🇰🇷', ping: 88, online: true },
+  { country: 'India', flag: '🇮🇳', ping: 100, online: true },
+  { country: 'Brazil', flag: '🇧🇷', ping: 110, online: true }
+];
+
+let isConnected = false;
+let selectedServer = null;
+
+function populateServers() {
+  const grid = document.getElementById('server-grid');
+  grid.innerHTML = servers.map((server, index) => `
+    <div class="server-card" onclick="selectServer(${index})">
+      <div class="server-status ${server.online ? 'status-online' : 'status-offline'}"></div>
+      <div class="flag">${server.flag}</div>
+      <h3>${server.country}</h3>
+      <p>Ping: ${server.ping}ms</p>
+    </div>
+  `).join('');
+}
+
+function selectServer(index) {
+  selectedServer = servers[index];
+  document.querySelectorAll('.server-card').forEach((card, i) => {
+    card.style.border = i === index ? '2px solid var(--primary)' : 'none';
+  });
+}
+
+function toggleConnection() {
+  if (!selectedServer) {
+    alert('Please select a server first');
+    return;
+  }
+
+  isConnected = !isConnected;
+  const connectBtn = document.querySelector('.connect-btn');
+  const connectText = document.getElementById('connect-text');
+
+  if (isConnected) {
+    connectBtn.style.background = 'var(--danger)';
+    connectText.textContent = 'Disconnect';
+    simulateConnection();
+  } else {
+    connectBtn.style.background = 'var(--primary)';
+    connectText.textContent = 'Connect';
+    resetConnection();
+  }
+}
+
+function simulateConnection() {
+  const downloadBar = document.getElementById('download-speed');
+  const uploadBar = document.getElementById('upload-speed');
+  const downloadText = document.getElementById('download-speed-text');
+  const uploadText = document.getElementById('upload-speed-text');
+
+  function updateSpeeds() {
+    if (!isConnected) return;
+    
+    const downloadSpeed = Math.floor(Math.random() * 100) + 50;
+    const uploadSpeed = Math.floor(Math.random() * 50) + 25;
+    
+    downloadBar.style.width = `${downloadSpeed}%`;
+    uploadBar.style.width = `${uploadSpeed}%`;
+    downloadText.textContent = `${downloadSpeed} Mbps`;
+    uploadText.textContent = `${uploadSpeed} Mbps`;
+  }
+
+  updateSpeeds();
+  setInterval(updateSpeeds, 2000);
+}
+
+function resetConnection() {
+  const downloadBar = document.getElementById('download-speed');
+  const uploadBar = document.getElementById('upload-speed');
+  const downloadText = document.getElementById('download-speed-text');
+  const uploadText = document.getElementById('upload-speed-text');
+
+  downloadBar.style.width = '0%';
+  uploadBar.style.width = '0%';
+  downloadText.textContent = '0 Mbps';
+  uploadText.textContent = '0 Mbps';
+}
+
+// Simulate active users count
+function updateActiveUsers() {
+  const activeUsers = document.getElementById('active-users');
+  setInterval(() => {
+    const count = Math.floor(Math.random() * 1000) + 2000;
+    activeUsers.textContent = count.toLocaleString();
+  }, 5000);
+}
+
+// Initialize
+populateServers();
+updateActiveUsers();
+</script>
+
+</body></html>
